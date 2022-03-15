@@ -6,13 +6,12 @@ import java.util.List;
 
 public class Board {
 	
-	public static final char AIPlayer = 'X';
-	public static final char humanPlayer = 'O';
+	public static final char AIPlayer = 'O';
+	public static final char humanPlayer = 'X';
 	
 	private char[] board = {' ', ' ', ' ',
-							' ', ' ', ' ',
-							' ', ' ', ' '};
-
+			' ', ' ', ' ',
+			' ', ' ', ' '};
 
 	public char[] getBoard() {
 		return board;
@@ -30,7 +29,8 @@ public class Board {
 			(board[1] == player && board[4] == player && board[7] == player) ||
 			(board[2] == player && board[5] == player && board[8] == player) ||
 			(board[0] == player && board[4] == player && board[8] == player) ||
-			(board[2] == player && board[4] == player && board[6] == player)) {
+			(board[2] == player && board[4] == player && board[6] == player)) 
+		{
 			return true;
 		} else {
 			return false;
@@ -39,8 +39,11 @@ public class Board {
 	
 	public boolean isTie() {
 		return !Arrays.toString(board).chars().anyMatch(s -> s == ' ');
-	}	
+	}
 	
+	public boolean endGame() {
+		return (isWinning(AIPlayer) || isWinning(humanPlayer) || isTie());
+	}
 	
 	public List<Integer> emptyPositions() {
 		List<Integer> list = new ArrayList<>();
@@ -64,7 +67,7 @@ public class Board {
 				viewBoard += board[i] + "\n";				
 				if (i != 8) {
 					viewBoard += "---------\n";					
-				}				
+				} 
 			}
 		}
 		return viewBoard;
